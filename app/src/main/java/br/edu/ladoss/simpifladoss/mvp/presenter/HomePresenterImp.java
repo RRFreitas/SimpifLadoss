@@ -1,10 +1,12 @@
 package br.edu.ladoss.simpifladoss.mvp.presenter;
 
 import android.content.Context;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
+import br.edu.ladoss.simpifladoss.R;
 import br.edu.ladoss.simpifladoss.mvp.HomeMVP;
 import br.edu.ladoss.simpifladoss.mvp.model.HomeModelImp;
 
@@ -25,6 +27,19 @@ public class HomePresenterImp implements HomeMVP.Presenter{
     @Override
     public void openScanner() {
         model.openScanner(view.get());
+    }
+
+    @Override
+    public void selectedItem(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.sair) {
+            quit();
+        }
+    }
+
+    @Override
+    public void quit() {
+        model.quit(view.get());
     }
 
     @Override

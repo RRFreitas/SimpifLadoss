@@ -1,9 +1,14 @@
 package br.edu.ladoss.simpifladoss.view.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -25,6 +30,10 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle(R.string.app_name);
+        setSupportActionBar(toolbar);
+
         presenter = new HomePresenterImp(this);
 
         btnCheck = (Button) findViewById(R.id.btnCheckin);
@@ -35,6 +44,18 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View{
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.item, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        presenter.selectedItem(item);
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
@@ -42,8 +63,8 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View{
             if(result.getContents() != null) {
                 presenter.showMessage(result.getContents());
             }else {
-                presenter.showMessage("Checkin cancelado.");
-            }
+                presenter.showMessage(getString(R.string.canceled));
+            };
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
