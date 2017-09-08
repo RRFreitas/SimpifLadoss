@@ -22,7 +22,7 @@ public class HomeModelImp implements HomeMVP.Model{
     public void openScanner(Activity activity) {
         IntentIntegrator integrator = new IntentIntegrator(activity);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-        integrator.setPrompt("Lendo QR-Code");
+        integrator.setPrompt("Lendo QR-Code...");
         integrator.setCameraId(0);
         integrator.initiateScan();
     }
