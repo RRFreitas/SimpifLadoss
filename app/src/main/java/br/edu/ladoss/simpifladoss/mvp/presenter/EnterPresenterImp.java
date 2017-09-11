@@ -22,6 +22,7 @@ public class EnterPresenterImp implements EnterMVP.Presenter {
     @Override
     public void doLogin() {
         model.doLogin();
+        view.get().finish();
     }
 
     @Override
