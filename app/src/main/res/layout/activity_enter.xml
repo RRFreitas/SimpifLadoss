@@ -37,17 +37,19 @@
                     <ImageView
                         android:id="@+id/logotipo"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:scaleType="fitStart"
-                        app:srcCompat="@drawable/simpif_logo" />
+                        app:srcCompat="@drawable/logo" />
 
                     <EditText
                         android:id="@+id/identificadorEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_marginTop="15dp"
                         android:autoText="true"
                         android:background="@drawable/edit_text_white_top"
@@ -58,15 +60,15 @@
                         android:maxLines="1"
                         android:padding="15dp"
                         android:singleLine="true"
-                        android:textColor="@color/gelo"
-                        android:textColorHint="@color/gelo"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:textAppearance="@android:style/TextAppearance.Material.Widget.EditText"
+                        android:textColorHint="@color/gelo" />
 
                     <EditText
                         android:id="@+id/passwordEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/edit_text_white_bottom"
                         android:hint="Senha"
@@ -76,10 +78,8 @@
                         android:maxLines="1"
                         android:padding="15dp"
                         android:singleLine="true"
-                        android:textColor="@color/gelo"
-                        android:textColorHint="@color/gelo"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"/>
+                        android:textAppearance="@android:style/TextAppearance.Material.Widget.EditText"
+                        android:textColorHint="@color/gelo" />
 
                     <Button
                         android:id="@+id/loginButton"
