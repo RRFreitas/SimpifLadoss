@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +17,14 @@ import android.widget.Button;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.IOException;
+
 import br.edu.ladoss.simpifladoss.R;
 import br.edu.ladoss.simpifladoss.mvp.HomeMVP;
 import br.edu.ladoss.simpifladoss.mvp.presenter.HomePresenterImp;
+import br.edu.ladoss.simpifladoss.network.ConnectionServer;
+import retrofit.Call;
+import retrofit.Response;
 
 public class HomeActivity extends AppCompatActivity implements HomeMVP.View{
 
@@ -64,6 +70,21 @@ public class HomeActivity extends AppCompatActivity implements HomeMVP.View{
         if(result != null) {
             if(result.getContents() != null) {
                 presenter.showMessage(result.getContents());
+
+                ConnectionServer.getInstance().updateServiceAdress();
+
+                Call<Void> call = ConnectionServer.getInstance().getService().checkin(result.getContents());
+                try {
+                    Response<Void> response = call.execute();
+
+                    if (response.isSuccess())
+                        presenter.showMessage("Checkin realizado com sucesso.");
+                    else
+                        presenter.showMessage("Checkin falhou.");
+
+                } catch (IOException e) {
+                    presenter.showMessage("Erro de conexão");
+                }
             }else {
                 presenter.showMessage(getString(R.string.canceled));
             };
